@@ -2,11 +2,24 @@
 <video id="player" controls autoplay></video>
 <button id="capture">Capture</button>
 <canvas id="canvas" width=320 height=240></canvas>
+<p id="demo"></p>
 <script>
   const player = document.getElementById('player');
   const canvas = document.getElementById('canvas');
   const context = canvas.getContext('2d');
   const captureButton = document.getElementById('capture');
+  
+  function loadDoc() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("demo").innerHTML = this.responseText;
+      }
+    };
+    var url = "https://ny1.ptopenlab.com/AIVision/api/dlapis/b23c5c26-476b-4d56-93c0-de4e0645bd5b?imageUrl=" + canvas.toDataURL();
+    xhttp.open("GET", url);
+    xhttp.send();
+  }
 
   const constraints = {
     video: true,
@@ -27,7 +40,7 @@
 </script>
 
 <!--
-
+?imageUrl=http://IP/path/fff287bc-412b-4b5d-9f8a-a3af27ca74d7.jpg
 Hello Today
 
 <form enctype="multipart/form-data" action="https://ny1.ptopenlab.com/AIVision/api/dlapis/b23c5c26-476b-4d56-93c0-de4e0645bd5b" method="POST">
@@ -37,3 +50,5 @@ Hello Today
 </form>
 
 -->
+
+
